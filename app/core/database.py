@@ -1,20 +1,8 @@
 from asyncio import current_task
-from datetime import datetime
 
-# from redis import asyncio as aioredis
-from sqlalchemy import NullPool, create_engine, func
-from sqlalchemy.ext.asyncio import (
-    async_scoped_session,
-    async_sessionmaker,
-    create_async_engine,
-)
-from sqlalchemy.orm import (
-    DeclarativeBase,
-    Mapped,
-    declared_attr,
-    mapped_column,
-    sessionmaker,
-)
+from sqlalchemy import NullPool, create_engine
+from sqlalchemy.ext.asyncio import async_scoped_session, async_sessionmaker, create_async_engine
+from sqlalchemy.orm import sessionmaker
 
 from app.core.settings import settings
 

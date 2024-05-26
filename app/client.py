@@ -3,18 +3,18 @@ from datetime import datetime
 from aiogram import Bot, Dispatcher, types
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
-from aiogram.filters.command import CommandStart, CommandObject
+from aiogram.filters.command import CommandObject, CommandStart
 from aiogram.utils.payload import decode_payload
 
-from app.keyboards.keyboard_start import keyboard as keyboard_start
 from app.core.settings import settings
 from app.filters.chat_type import ChatTypeFilter
 from app.filters.user_contact import UserContactFilter
 from app.handlers.about import router as about_router
-from app.handlers.contacts import router as contacts_router
 from app.handlers.back_menu import router as back_menu_router
-from app.handlers.consultation import router as consultation_router
 from app.handlers.construction import router as construction_router
+from app.handlers.consultation import router as consultation_router
+from app.handlers.contacts import router as contacts_router
+from app.keyboards.keyboard_start import keyboard as keyboard_start
 
 bot = Bot(
     token=settings.TOKEN,
@@ -37,18 +37,18 @@ dp.include_routers(construction_router)
 async def cmd_start(message: types.Message, command: CommandObject):
     try:
         payload = decode_payload(command.args)
-    except:
+    except Exception:
         payload = None
 
     ...  # создание нового пользователя в бд
     hello_text = ...  # получение преветствия из бд
 
     hello_text = (
-        f"Я бот Строительной компании «ИнСтрой»\.\n\n"
-        f"Я помогу прикинуть стоимость дома, подробнее расскажу о компании, "
-        f"свяжу со специалистом и многое другое\.\n\n"
-        f"Ниже в меню выберите с чего бы вам хотелось начать\.\n\n"
-        f"*⚠️ Если кнопочное меню не видно, нажмите иконку 🎛 в правом нижнем углу*"
+        "Я бот Строительной компании «ИнСтрой»\.\n\n"
+        "Я помогу прикинуть стоимость дома, подробнее расскажу о компании, "
+        "свяжу со специалистом и многое другое\.\n\n"
+        "Ниже в меню выберите с чего бы вам хотелось начать\.\n\n"
+        "*⚠️ Если кнопочное меню не видно, нажмите иконку 🎛 в правом нижнем углу*"
     )
     await message.answer(
         f"Здравствуйте, {message.chat.first_name}\!\n\n{hello_text}",

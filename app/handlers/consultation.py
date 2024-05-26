@@ -1,8 +1,8 @@
-from aiogram import Router, F
+from aiogram import F, Router
 from aiogram.types import Message
 
-from app.keyboards.keyboard_return_phone import keyboard as keyboard_return_phone
 from app.filters.chat_type import ChatTypeFilter
+from app.keyboards.keyboard_return_phone import keyboard as keyboard_return_phone
 
 router = Router()
 
