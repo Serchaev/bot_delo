@@ -6,6 +6,7 @@ from aiogram.enums import ParseMode
 from aiogram.filters.command import CommandObject, CommandStart
 from aiogram.utils.payload import decode_payload
 
+from app.core.services.user_service import UserService
 from app.core.settings import settings
 from app.filters.chat_type import ChatTypeFilter
 from app.filters.user_contact import UserContactFilter
@@ -14,7 +15,11 @@ from app.handlers.back_menu import router as back_menu_router
 from app.handlers.construction import router as construction_router
 from app.handlers.consultation import router as consultation_router
 from app.handlers.contacts import router as contacts_router
+from app.handlers.user_contact import router as user_contact_router
+from app.handlers.partner_program import router as partner_program_router
+from app.handlers.ref_program import router as ref_program_router
 from app.keyboards.keyboard_start import keyboard as keyboard_start
+from app.texts.hello_text import hello_text
 
 bot = Bot(
     token=settings.TOKEN,
@@ -28,6 +33,9 @@ dp.include_routers(consultation_router)
 dp.include_routers(about_router)
 dp.include_routers(contacts_router)
 dp.include_routers(construction_router)
+dp.include_routers(user_contact_router)
+dp.include_routers(partner_program_router)
+dp.include_routers(ref_program_router)
 
 
 @dp.message(
@@ -40,31 +48,20 @@ async def cmd_start(message: types.Message, command: CommandObject):
     except Exception:
         payload = None
 
-    ...  # создание нового пользователя в бд
-    hello_text = ...  # получение преветствия из бд
-
-    hello_text = (
-        "Я бот Строительной компании «ИнСтрой»\.\n\n"
-        "Я помогу прикинуть стоимость дома, подробнее расскажу о компании, "
-        "свяжу со специалистом и многое другое\.\n\n"
-        "Ниже в меню выберите с чего бы вам хотелось начать\.\n\n"
-        "*⚠️ Если кнопочное меню не видно, нажмите иконку 🎛 в правом нижнем углу*"
+    await UserService.add_user(
+        tg_id=str(message.from_user.id),
+        username=message.from_user.username,
+        first_name=message.from_user.first_name,
+        last_name=message.from_user.last_name,
+        refer_id=payload,
     )
+
     await message.answer(
-        f"Здравствуйте, {message.chat.first_name}\!\n\n{hello_text}",
+        text=f"Здравствуйте, {message.chat.first_name}!\n\n{hello_text}",
         reply_markup=keyboard_start,
+        parse_mode=ParseMode.HTML,
     )
-
-
-@dp.message(UserContactFilter())
-async def test(message: types.Message):
-    print(message.contact)
-    print(message.text)
 
 
 async def main():
-    while True:
-        try:
-            await dp.start_polling(bot)
-        finally:
-            print("end")
+    await dp.start_polling(bot)

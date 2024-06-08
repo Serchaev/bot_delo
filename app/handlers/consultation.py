@@ -13,7 +13,7 @@ router = Router()
 )
 async def consultation(message: Message):
     await message.answer(
-        text="Напишите ваш номер телефона, чтобы менеджер мог связаться с вами.",
+        text="Отправьте свой контакт, чтобы менеджер мог связаться с вами.",
         reply_markup=keyboard_return_phone,
         parse_mode=None,
     )

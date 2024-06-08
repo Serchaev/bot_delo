@@ -14,13 +14,13 @@ router = Router()
 )
 async def contacts(message: Message):
     await message.answer(
-        text="Наши контакты\n\n"
-        "🌐 cайт: https://serious-business.ru (http://taplink.cc/igor_gelver)\n\n"
-        "🌐Instagram:\n"
-        "https://instagram.com/serious_business.ru\n\n"
-        "🌐 YouTube: https://www.youtube.com/channel/UClxZartuD1guGmNyp6n6_uQ \n\n"
-        "🌐 ВК: https://vk.com/ks123ru\n\n"
-        "🌐 Телеграм: https://t.me/igorgelver",
+        text='<b>За ремонтом? Это в  "ИнСтрой"!</b>\n\n'
+        "🔑 Ремонт квартир, домов и коммерческих помещений под ключ. "
+        "Современный дизайн, индивидуальные проекты, профессиональная команда — и это только начало.\n\n"
+        "🔗 Познакомьтесь с нашими проектами и следите за обновлениями:"
+        "\n- <b>Телеграм</b> → https://t.me/instroy61"
+        "\n- <b>YouTube</b> → https://www.youtube.com/@user-zw9jt7ut2g"
+        "\n- <b>ВКонтакте</b> → https://vk.com/in_stroy.remont",
         reply_markup=keyboard_consultation,
         parse_mode=ParseMode.HTML,
     )
