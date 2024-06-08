@@ -10,8 +10,6 @@ class Settings(BaseSettings):
         env_file=BASE_DIR.joinpath(".env"),
     )
 
-    MODE: int
-    SERVER_URL: str
     TOKEN: str
 
     DB_HOST: str

@@ -6,11 +6,6 @@ from sqlalchemy.orm import sessionmaker
 
 from app.core.settings import settings
 
-if settings.MODE == "TEST":
-    DATABASE_PARAMS = {"poolclass": NullPool}
-else:
-    DATABASE_PARAMS = {}
-
 
 class DatabaseFactory:
     def __init__(
@@ -21,7 +16,6 @@ class DatabaseFactory:
         self.engine = create_async_engine(
             url=db_url,
             echo=db_echo,
-            **DATABASE_PARAMS,
         )
 
         self.session_factory = async_sessionmaker(
