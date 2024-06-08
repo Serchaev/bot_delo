@@ -1,19 +1,17 @@
 from datetime import datetime, timezone
 
-from sqlalchemy import DateTime, func
+from sqlalchemy import ForeignKey, DateTime, func
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.models import Base
 
 
-class User(Base):
-    __tablename__ = "users"
+class Refer(Base):
+    __tablename__ = "referrals"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    tg_id: Mapped[str] = mapped_column(unique=True, index=True)
-    username: Mapped[str | None] = mapped_column(index=True)
-    first_name: Mapped[str | None]
-    last_name: Mapped[str | None]
+    adding: Mapped[str] = mapped_column(index=True)
+    added: Mapped[str] = mapped_column(index=True)
     date_created = mapped_column(
         DateTime(timezone=True),
         nullable=False,
