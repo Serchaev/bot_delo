@@ -22,6 +22,9 @@ from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
 
 buttons = [
     [
+        KeyboardButton(text="Расчитать стоимость ремонта 🏡"),
+    ],
+    [
         KeyboardButton(text="О Компании"),
         KeyboardButton(text="Наши контакты"),
     ],

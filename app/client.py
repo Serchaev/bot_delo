@@ -18,6 +18,7 @@ from app.handlers.contacts import router as contacts_router
 from app.handlers.user_contact import router as user_contact_router
 from app.handlers.partner_program import router as partner_program_router
 from app.handlers.ref_program import router as ref_program_router
+from app.handlers.calculate_remont import router as calculate_remont_router
 from app.keyboards.keyboard_start import keyboard as keyboard_start
 from app.texts.hello_text import hello_text
 
@@ -28,6 +29,7 @@ bot = Bot(
 dp = Dispatcher()
 dp["started_at"] = datetime.now().strftime("%Y-%m-%d %H:%M")
 
+dp.include_routers(calculate_remont_router)
 dp.include_routers(back_menu_router)
 dp.include_routers(consultation_router)
 dp.include_routers(about_router)
