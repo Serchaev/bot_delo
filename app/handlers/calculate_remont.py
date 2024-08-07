@@ -97,7 +97,7 @@ async def food_chosen(message: Message, state: FSMContext, bot: Bot):
     await state.clear()
     tmp = "\n".join((f"{key} - {value}" for key, value in user_data.items()))
     try:
-        await bot.send_message(chat_id="876276723", text=f"Новая заявка:\n{tmp}", parse_mode=None)
+        await bot.send_message(chat_id="-4157112517", text=f"Новая заявка:\n{tmp}", parse_mode=None)
     except Exception as e:
         print(e)
         print("Ошибка отправки админу")
