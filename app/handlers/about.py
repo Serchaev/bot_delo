@@ -1,5 +1,5 @@
 from aiogram import F, Router
-from aiogram.enums import parse_mode, ParseMode
+from aiogram.enums import ParseMode
 from aiogram.types import Message
 
 from app.filters.chat_type import ChatTypeFilter

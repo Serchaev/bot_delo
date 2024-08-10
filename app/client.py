@@ -9,7 +9,6 @@ from aiogram.utils.payload import decode_payload
 from app.core.services.user_service import UserService
 from app.core.settings import settings
 from app.filters.chat_type import ChatTypeFilter
-from app.filters.user_contact import UserContactFilter
 from app.handlers.about import router as about_router
 from app.handlers.back_menu import router as back_menu_router
 from app.handlers.construction import router as construction_router

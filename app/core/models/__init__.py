@@ -1,4 +1,4 @@
-from app.core.models.base import Base
-from app.core.models.user import User
-from app.core.models.refer import Refer
-from app.core.models.consultation import Consultation
+from app.core.models.base import Base  # noqa
+from app.core.models.user import User  # noqa
+from app.core.models.refer import Refer  # noqa
+from app.core.models.consultation import Consultation  # noqa

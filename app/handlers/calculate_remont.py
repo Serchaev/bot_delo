@@ -8,7 +8,6 @@ from app.filters.user_contact import UserContactFilter
 from app.keyboards import keyboard_start, keyboard_return_phone
 from app.keyboards.keyboard_calculate_remont import keyboard_1, keyboard_2, keyboard_3, keyboard_4
 from app.states.order_remont import CalculateRemont
-from app.texts.remont_start import remont_start
 
 router = Router()
 

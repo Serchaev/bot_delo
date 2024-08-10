@@ -7,7 +7,6 @@ from app.core.services.refer_service import ReferService
 from app.core.settings import settings
 from app.filters.chat_type import ChatTypeFilter
 from app.keyboards.keyboard_only_start import keyboard as keyboard_only_start
-from app.texts.partner_program_text import partner_program_text
 from app.texts.ref_text import ref_text
 
 router = Router()

@@ -1,6 +1,3 @@
-from asyncpg import UniqueViolationError
-from sqlalchemy.exc import IntegrityError
-
 from app.core.database import db_factory
 from app.core.repositories.refer_repo import ReferRepo
 from app.core.repositories.user_repo import UserRepo
