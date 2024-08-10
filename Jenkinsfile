@@ -19,7 +19,7 @@ pipeline {
                 }
             }
         }
-        stage('Run Black') {
+        stage('Black') {
             steps {
                 script {
                     FAILED_STAGE=env.STAGE_NAME
@@ -28,7 +28,7 @@ pipeline {
                 }
             }
         }
-        stage('Run Isort') {
+        stage('Isort') {
             steps {
                 script {
                     FAILED_STAGE=env.STAGE_NAME
@@ -37,7 +37,7 @@ pipeline {
                 }
             }
         }
-        stage('Run Flake8') {
+        stage('Flake8') {
             steps {
                 script {
                     FAILED_STAGE=env.STAGE_NAME
