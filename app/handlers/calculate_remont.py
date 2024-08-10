@@ -1,11 +1,11 @@
-from aiogram import F, Router, Bot
+from aiogram import Bot, F, Router
 from aiogram.enums import ParseMode
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 
 from app.filters.chat_type import ChatTypeFilter
 from app.filters.user_contact import UserContactFilter
-from app.keyboards import keyboard_start, keyboard_return_phone
+from app.keyboards import keyboard_return_phone, keyboard_start
 from app.keyboards.keyboard_calculate_remont import keyboard_1, keyboard_2, keyboard_3, keyboard_4
 from app.states.order_remont import CalculateRemont
 

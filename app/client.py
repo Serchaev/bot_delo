@@ -11,13 +11,13 @@ from app.core.settings import settings
 from app.filters.chat_type import ChatTypeFilter
 from app.handlers.about import router as about_router
 from app.handlers.back_menu import router as back_menu_router
+from app.handlers.calculate_remont import router as calculate_remont_router
 from app.handlers.construction import router as construction_router
 from app.handlers.consultation import router as consultation_router
 from app.handlers.contacts import router as contacts_router
-from app.handlers.user_contact import router as user_contact_router
 from app.handlers.partner_program import router as partner_program_router
 from app.handlers.ref_program import router as ref_program_router
-from app.handlers.calculate_remont import router as calculate_remont_router
+from app.handlers.user_contact import router as user_contact_router
 from app.keyboards.keyboard_start import keyboard as keyboard_start
 from app.texts.hello_text import hello_text
 
