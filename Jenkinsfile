@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     // Запуск проверки Black в контейнере
-                    sh 'docker run --rm -v $(pwd):/app bot_delo-ci-image black --check /app'
+                    sh 'docker run --rm -v $(pwd):/app bot_delo-ci-image black --check /app/app'
                 }
             }
         }
@@ -29,7 +29,7 @@ pipeline {
             steps {
                 script {
                     // Запуск проверки Isort в контейнере
-                    sh 'docker run --rm -v $(pwd):/app bot_delo-ci-image isort --check-only /app'
+                    sh 'docker run --rm -v $(pwd):/app bot_delo-ci-image isort --check-only /app/app'
                 }
             }
         }
@@ -37,7 +37,7 @@ pipeline {
             steps {
                 script {
                     // Запуск проверки Flake8 в контейнере
-                    sh 'docker run --rm -v $(pwd):/app bot_delo-ci-image flake8 /app'
+                    sh 'docker run --rm -v $(pwd):/app bot_delo-ci-image flake8 /app/app'
                 }
             }
         }
