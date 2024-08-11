@@ -6,6 +6,12 @@ properties([disableConcurrentBuilds()])
 
 pipeline {
     agent any
+    environment {
+        DEPLOY_SERVER = '192.168.0.158'
+        DEPLOY_USER = 'server'
+        DEPLOY_DIR = '/home/server/builds/bot_delo'
+        DOCKER_IMAGE = 'bot_delo-image'
+    }
     options {
         buildDiscarder(logRotator(numToKeepStr: '3', artifactNumToKeepStr: '3'))
         timestamps()
@@ -32,9 +38,24 @@ pipeline {
                 script {
                     FAILED_STAGE=env.STAGE_NAME
                     FAILED_STEP="Image build"
-                    sh 'docker build -t localhost:5050/my-app:latest .'
+                    sh "docker build -t localhost:5050/${DOCKER_IMAGE}:latest ."
                     FAILED_STEP="Image push"
-                    sh 'docker push localhost:5050/my-app:latest'
+                    sh "docker push localhost:5050/${DOCKER_IMAGE}:latest"
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    FAILED_STAGE=env.STAGE_NAME
+                    FAILED_STEP="Image deploy"
+                    sh """
+                        ssh ${DEPLOY_USER}@${DEPLOY_SERVER} '
+                            cd /home/server/builds/bot_delo &&
+                            docker-compose pull &&
+                            docker-compose up -d
+                        '
+                    """
                 }
             }
         }
