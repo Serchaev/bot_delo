@@ -1,6 +1,7 @@
 #!groovy
 // Run docker build
 def FAILED_STAGE
+def FAILED_STEP
 properties([disableConcurrentBuilds()])
 
 pipeline {
@@ -10,46 +11,37 @@ pipeline {
         timestamps()
     }
     stages {
-        stage('Build Docker Image') {
+        stage('Linters') {
             steps {
                 script {
                     FAILED_STAGE=env.STAGE_NAME
+                    FAILED_STEP="Build Docker Image Linters"
                     // Сборка Docker-образа с зависимостями
                     sh 'docker build -t bot_delo-ci-image -f ./cicd/python-lintings/Dockerfile .'
-                }
-            }
-        }
-        stage('Black') {
-            steps {
-                script {
-                    FAILED_STAGE=env.STAGE_NAME
-                    // Запуск проверки Black в контейнере
+                    FAILED_STEP="Black"
                     sh 'docker run --rm -v $(pwd):/app bot_delo-ci-image black --check /app/app'
-                }
-            }
-        }
-        stage('Isort') {
-            steps {
-                script {
-                    FAILED_STAGE=env.STAGE_NAME
-                    // Запуск проверки Isort в контейнере
+                    FAILED_STEP="Isort"
                     sh 'docker run --rm -v $(pwd):/app bot_delo-ci-image isort --check-only /app/app'
+                    FAILED_STEP="Flake8"
+                    sh 'docker run --rm -v $(pwd):/app bot_delo-ci-image flake8 /app/app'
                 }
             }
         }
-        stage('Flake8') {
+        stage('Build') {
             steps {
                 script {
                     FAILED_STAGE=env.STAGE_NAME
-                    // Запуск проверки Flake8 в контейнере
-                    sh 'docker run --rm -v $(pwd):/app bot_delo-ci-image flake8 /app/app'
+                    FAILED_STEP="Image build"
+                    sh 'docker build -t localhost:5050/my-app:latest .'
+                    FAILED_STEP="Image push"
+                    sh 'docker push localhost:5050/my-app:latest'
                 }
             }
         }
     }
     post {
         failure {
-            echo "Failed stage name: ${FAILED_STAGE}"
+            echo "Failed stage name: ${FAILED_STAGE}, step name: ${FAILED_STEP}"
         }
     }
 }
