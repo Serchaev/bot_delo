@@ -11,6 +11,7 @@ pipeline {
         DEPLOY_USER = 'server'
         DEPLOY_DIR = '/home/server/builds/bot_delo'
         DOCKER_IMAGE = 'bot_delo-image'
+        DOCKER_REGISTRY = 'localhost:5050'
     }
     options {
         buildDiscarder(logRotator(numToKeepStr: '3', artifactNumToKeepStr: '3'))
@@ -38,9 +39,9 @@ pipeline {
                 script {
                     FAILED_STAGE=env.STAGE_NAME
                     FAILED_STEP="Image build"
-                    sh "docker build -t localhost:5050/${DOCKER_IMAGE}:latest ."
+                    sh "docker build -t ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest ."
                     FAILED_STEP="Image push"
-                    sh "docker push localhost:5050/${DOCKER_IMAGE}:latest"
+                    sh "docker push ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest"
                 }
             }
         }
@@ -52,8 +53,8 @@ pipeline {
                     sh """
                         ssh ${DEPLOY_USER}@${DEPLOY_SERVER} '
                             cd /home/server/builds/bot_delo &&
-                            docker-compose pull &&
-                            docker-compose up -d
+                            docker compose pull &&
+                            docker compose up -d
                         '
                     """
                 }
