@@ -77,7 +77,7 @@ async def calculate_remont_3(message: Message, state: FSMContext):
 async def calculate_remont_4(message: Message, state: FSMContext):
     await state.update_data(**{"Ключи получили?": message.text.lower()})
     await message.answer(
-        text="Отправьте свой контакт, чтобы менеджер мог связаться с вами.",
+        text="Нажмите кнопку отправить, чтобы менеджер мог связаться с вами.",
         reply_markup=keyboard_return_phone.keyboard,
         parse_mode=None,
     )
